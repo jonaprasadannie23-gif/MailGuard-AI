@@ -9,13 +9,11 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Model artifacts and local database
+# Local database and test artifacts
 backend/probmail.db
 backend/probmail.db*
 *.db
-backend/models/*.joblib
-backend/models/*.json
-!backend/models/.gitkeep
+backend/test_probmail.db
 
 # Node / Frontend
 node_modules/

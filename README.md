@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ProbMail — Intelligent Spam & Phishing Email Detection System
 
 ProbMail is a complete, production-grade cybersecurity AI platform built for probabilistic email classification and threat explainability. Combining natural language preprocessing, statistical corpus analysis, **Chi-Square ($\chi^2$) feature selection**, and **Multinomial Naive Bayes**, ProbMail detects malicious spam and phishing lures while ensuring **zero data leakage** between training and inference.
@@ -136,20 +135,19 @@ It features a mathematically grounded **Multinomial Naive Bayes** classification
    - Comprehensive metrics: Accuracy, Macro/Weighted Precision, Recall, and F1-Scores.
    - $2 \times 2$ Confusion Matrix with True Negatives, False Positives (Type I), False Negatives (Type II), and True Positives.
    - Cybersecurity trade-off analysis explaining false alarm vs. breach risk.
->>>>>>> d47a9c144f76e2ea675e77041e320ed75c8258b5
 
 ---
 
 ## Technology Stack
 
-<<<<<<< HEAD
 ### Backend
 - **Python 3.13 / 3.11+**
 - **Flask & Flask-CORS**: REST API routing and cross-origin security.
+- **PostgreSQL (Neon / Supabase / RDS)**: Persistent production database via `DATABASE_URL` / `POSTGRES_URL`.
+- **SQLite3**: Privacy-preserving audit logs and zero-configuration local development.
 - **scikit-learn**: `TfidfVectorizer`, `SelectKBest`, `chi2`, `MultinomialNB`, `train_test_split`, `metrics`.
 - **pandas & NumPy & SciPy**: Dataset hygiene, matrix calculations, and descriptive statistics.
 - **Joblib**: Atomic pipeline artifact serialization.
-- **SQLite3**: Privacy-preserving prediction audit logs.
 - **pytest**: Automated unit and integration testing suite.
 
 ### Frontend
@@ -280,12 +278,10 @@ npm run build
 
 # Preview production build on port 3000
 npm run preview
->>>>>>> d47a9c144f76e2ea675e77041e320ed75c8258b5
 ```
 
 ---
 
-<<<<<<< HEAD
 ## REST API Reference
 
 | Method | Endpoint | Description |
@@ -326,7 +322,3 @@ npm run preview
 ## License & Academic Attribution
 Developed as an academic demonstration and cybersecurity AI project.
 Licensed under the MIT License.
-=======
-## License
-MIT License.
->>>>>>> d47a9c144f76e2ea675e77041e320ed75c8258b5

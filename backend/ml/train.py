@@ -146,7 +146,7 @@ def train_probmail_model(
     # 6. Save Pipeline and Metadata
     pipeline_filename = "model_pipeline.joblib"
     pipeline_path = os.path.join(MODELS_DIR, pipeline_filename)
-    joblib.dump(pipeline, pipeline_path)
+    metadata_path = os.path.join(MODELS_DIR, "model_metadata.json")
 
     metadata = {
         "model_name": "ProbMail Multinomial Naive Bayes with Chi-Square Selection",
@@ -180,9 +180,19 @@ def train_probmail_model(
         "status": "active"
     }
 
-    metadata_path = os.path.join(MODELS_DIR, "model_metadata.json")
-    with open(metadata_path, "w", encoding="utf-8") as f:
-        json.dump(metadata, f, indent=2, cls=NumpyTypeEncoder)
+    try:
+        joblib.dump(pipeline, pipeline_path)
+        with open(metadata_path, "w", encoding="utf-8") as f:
+            json.dump(metadata, f, indent=2, cls=NumpyTypeEncoder)
+    except (OSError, PermissionError):
+        tmp_models = Path("/tmp/models")
+        tmp_models.mkdir(parents=True, exist_ok=True)
+        pipeline_path = str(tmp_models / pipeline_filename)
+        metadata_path = str(tmp_models / "model_metadata.json")
+        joblib.dump(pipeline, pipeline_path)
+        with open(metadata_path, "w", encoding="utf-8") as f:
+            json.dump(metadata, f, indent=2, cls=NumpyTypeEncoder)
+        metadata["pipeline_path"] = pipeline_path
 
     # Update in-memory cache
     _CACHED_PIPELINE = pipeline
@@ -199,8 +209,14 @@ def load_trained_pipeline() -> Tuple[Optional[Pipeline], Optional[Dict[str, Any]
     """Loads the active saved pipeline and metadata, with in-memory caching."""
     global _CACHED_PIPELINE, _CACHED_METADATA, _CACHED_MTIME
 
-    pipeline_path = os.path.join(MODELS_DIR, "model_pipeline.joblib")
-    metadata_path = os.path.join(MODELS_DIR, "model_metadata.json")
+    tmp_pipe = Path("/tmp/models/model_pipeline.joblib")
+    tmp_meta = Path("/tmp/models/model_metadata.json")
+    if tmp_pipe.exists() and tmp_meta.exists():
+        pipeline_path = str(tmp_pipe)
+        metadata_path = str(tmp_meta)
+    else:
+        pipeline_path = os.path.join(MODELS_DIR, "model_pipeline.joblib")
+        metadata_path = os.path.join(MODELS_DIR, "model_metadata.json")
 
     if not os.path.exists(pipeline_path) or not os.path.exists(metadata_path):
         _CACHED_PIPELINE = None

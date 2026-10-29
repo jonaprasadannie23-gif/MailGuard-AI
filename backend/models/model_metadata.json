@@ -1,0 +1,512 @@
+{
+  "model_name": "ProbMail Multinomial Naive Bayes with Chi-Square Selection",
+  "trained_at": "2026-10-28T17:14:33.806444+00:00",
+  "duration_seconds": 0.063,
+  "dataset_info": {
+    "filename": "enron_spam_data.csv",
+    "path": "/Users/adlin/Desktop/MailGuard-AI/backend/data/enron_spam_data.csv",
+    "mtime": 1793114583.9245481,
+    "size": 418651,
+    "usable_samples": 1352
+  },
+  "dataset_statistics": {
+    "total_samples": 1352,
+    "train_samples": 1081,
+    "test_samples": 271,
+    "split_ratio": "80/20",
+    "stratified": true,
+    "classes": [
+      "ham",
+      "spam"
+    ],
+    "class_distribution_train": {
+      "ham": 659,
+      "spam": 422
+    },
+    "class_distribution_test": {
+      "ham": 165,
+      "spam": 106
+    }
+  },
+  "hyperparameters": {
+    "k_best_features": 50,
+    "max_features": 1500,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "nb_alpha": 1.0,
+    "random_state": 42
+  },
+  "evaluation": {
+    "test_samples": 271,
+    "positive_class": "spam",
+    "negative_class": "ham",
+    "spam_detection": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "support": 106
+    },
+    "overall": {
+      "accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0,
+      "weighted_precision": 1.0,
+      "weighted_recall": 1.0,
+      "weighted_f1": 1.0
+    },
+    "per_class": {
+      "ham": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 165
+      },
+      "spam": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 106
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "ham",
+        "spam"
+      ],
+      "positive_class": "spam",
+      "negative_class": "ham",
+      "matrix": [
+        [
+          165,
+          0
+        ],
+        [
+          0,
+          106
+        ]
+      ],
+      "breakdown": {
+        "true_negatives": 165,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "true_positives": 106
+      },
+      "interpretation": {
+        "true_positives_note": "106 spam emails correctly detected and blocked.",
+        "true_negatives_note": "165 legitimate emails correctly delivered.",
+        "false_positives_note": "0 legitimate emails incorrectly flagged as spam (Type I False Alarm).",
+        "false_negatives_note": "0 spam emails missed and bypassed the filter (Type II Security Risk)."
+      }
+    },
+    "metric_explanations": {
+      "accuracy": "Overall ratio of correct predictions across both classes: (TP + TN) / Total.",
+      "precision": "Accuracy of spam alerts: Of all emails flagged as spam, what proportion were actually spam: TP / (TP + FP).",
+      "recall": "Spam catch rate (Sensitivity): Of all actual spam emails, what proportion did the model catch: TP / (TP + FN).",
+      "f1_score": "Harmonic mean of Precision and Recall, balancing false alarms against missed threats: 2 * (P * R) / (P + R).",
+      "positive_class_designation": "In ProbMail's security model, 'Spam' is designated as the positive class (the condition being detected), while 'Ham' is the negative class."
+    },
+    "reliability": "Reliable (evaluated on held-out test split)",
+    "notes": "All reported metrics are measured exclusively on the held-out test split, ensuring no data leakage from training or feature selection."
+  },
+  "chi_square_summary": {
+    "selected_k": 50,
+    "significant_features_count": 50,
+    "top_features": [
+      {
+        "feature": "url_token",
+        "chi2_score": 55.0889,
+        "p_value": 1.1519895650337605e-13,
+        "p_value_formatted": "1.15e-13",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0836,
+        "explanation": "'url_token' shows strong statistical dependence with spam indicator (Chi-Square: 55.09, p-value: 1.15e-13)."
+      },
+      {
+        "feature": "visit url_token",
+        "chi2_score": 38.8265,
+        "p_value": 4.63203366090854e-10,
+        "p_value_formatted": "4.63e-10",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0589,
+        "explanation": "'visit url_token' shows strong statistical dependence with spam indicator (Chi-Square: 38.83, p-value: 4.63e-10)."
+      },
+      {
+        "feature": "visit",
+        "chi2_score": 38.8265,
+        "p_value": 4.63203366090854e-10,
+        "p_value_formatted": "4.63e-10",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0589,
+        "explanation": "'visit' shows strong statistical dependence with spam indicator (Chi-Square: 38.83, p-value: 4.63e-10)."
+      },
+      {
+        "feature": "limited time",
+        "chi2_score": 37.1376,
+        "p_value": 1.1008248454687274e-09,
+        "p_value_formatted": "1.10e-09",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0564,
+        "explanation": "'limited time' shows strong statistical dependence with spam indicator (Chi-Square: 37.14, p-value: 1.10e-09)."
+      },
+      {
+        "feature": "limited",
+        "chi2_score": 37.1376,
+        "p_value": 1.1008248454687274e-09,
+        "p_value_formatted": "1.10e-09",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0564,
+        "explanation": "'limited' shows strong statistical dependence with spam indicator (Chi-Square: 37.14, p-value: 1.10e-09)."
+      },
+      {
+        "feature": "time",
+        "chi2_score": 37.1376,
+        "p_value": 1.1008248454687274e-09,
+        "p_value_formatted": "1.10e-09",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0564,
+        "explanation": "'time' shows strong statistical dependence with spam indicator (Chi-Square: 37.14, p-value: 1.10e-09)."
+      },
+      {
+        "feature": "currency_token num_token",
+        "chi2_score": 35.9651,
+        "p_value": 2.008813337785094e-09,
+        "p_value_formatted": "2.01e-09",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0546,
+        "explanation": "'currency_token num_token' shows strong statistical dependence with spam indicator (Chi-Square: 35.97, p-value: 2.01e-09)."
+      },
+      {
+        "feature": "currency_token",
+        "chi2_score": 35.9651,
+        "p_value": 2.008813337785094e-09,
+        "p_value_formatted": "2.01e-09",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0546,
+        "explanation": "'currency_token' shows strong statistical dependence with spam indicator (Chi-Square: 35.97, p-value: 2.01e-09)."
+      },
+      {
+        "feature": "act",
+        "chi2_score": 34.3226,
+        "p_value": 4.669314875767566e-09,
+        "p_value_formatted": "4.67e-09",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0521,
+        "explanation": "'act' shows strong statistical dependence with spam indicator (Chi-Square: 34.32, p-value: 4.67e-09)."
+      },
+      {
+        "feature": "bonus",
+        "chi2_score": 31.9691,
+        "p_value": 1.566436537102137e-08,
+        "p_value_formatted": "1.57e-08",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0485,
+        "explanation": "'bonus' shows strong statistical dependence with spam indicator (Chi-Square: 31.97, p-value: 1.57e-08)."
+      },
+      {
+        "feature": "act limited",
+        "chi2_score": 30.0821,
+        "p_value": 4.141359259819725e-08,
+        "p_value_formatted": "4.14e-08",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0456,
+        "explanation": "'act limited' shows strong statistical dependence with spam indicator (Chi-Square: 30.08, p-value: 4.14e-08)."
+      },
+      {
+        "feature": "num_token visit",
+        "chi2_score": 30.0821,
+        "p_value": 4.141359259819725e-08,
+        "p_value_formatted": "4.14e-08",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0456,
+        "explanation": "'num_token visit' shows strong statistical dependence with spam indicator (Chi-Square: 30.08, p-value: 4.14e-08)."
+      },
+      {
+        "feature": "time bonus",
+        "chi2_score": 30.0821,
+        "p_value": 4.141359259819725e-08,
+        "p_value_formatted": "4.14e-08",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0456,
+        "explanation": "'time bonus' shows strong statistical dependence with spam indicator (Chi-Square: 30.08, p-value: 4.14e-08)."
+      },
+      {
+        "feature": "url_token act",
+        "chi2_score": 30.0821,
+        "p_value": 4.141359259819725e-08,
+        "p_value_formatted": "4.14e-08",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0456,
+        "explanation": "'url_token act' shows strong statistical dependence with spam indicator (Chi-Square: 30.08, p-value: 4.14e-08)."
+      },
+      {
+        "feature": "free",
+        "chi2_score": 28.8714,
+        "p_value": 7.734800878445828e-08,
+        "p_value_formatted": "7.73e-08",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0438,
+        "explanation": "'free' shows strong statistical dependence with spam indicator (Chi-Square: 28.87, p-value: 7.73e-08)."
+      },
+      {
+        "feature": "click",
+        "chi2_score": 28.8227,
+        "p_value": 7.93142317888194e-08,
+        "p_value_formatted": "7.93e-08",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0437,
+        "explanation": "'click' shows strong statistical dependence with spam indicator (Chi-Square: 28.82, p-value: 7.93e-08)."
+      },
+      {
+        "feature": "num_token num_token",
+        "chi2_score": 25.839,
+        "p_value": 3.7110455561011597e-07,
+        "p_value_formatted": "3.71e-07",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0154,
+        "spam_mean_tfidf": 0.0789,
+        "explanation": "'num_token num_token' shows strong statistical dependence with spam indicator (Chi-Square: 25.84, p-value: 3.71e-07)."
+      },
+      {
+        "feature": "guaranteed",
+        "chi2_score": 25.5291,
+        "p_value": 4.357679213058511e-07,
+        "p_value_formatted": "4.36e-07",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0387,
+        "explanation": "'guaranteed' shows strong statistical dependence with spam indicator (Chi-Square: 25.53, p-value: 4.36e-07)."
+      },
+      {
+        "feature": "click url_token",
+        "chi2_score": 24.4892,
+        "p_value": 7.472841663069282e-07,
+        "p_value_formatted": "7.47e-07",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0372,
+        "explanation": "'click url_token' shows strong statistical dependence with spam indicator (Chi-Square: 24.49, p-value: 7.47e-07)."
+      },
+      {
+        "feature": "energy",
+        "chi2_score": 20.1978,
+        "p_value": 6.983413451717566e-06,
+        "p_value_formatted": "6.98e-06",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Ham Indicator",
+        "leaning_class": "ham",
+        "ham_mean_tfidf": 0.0479,
+        "spam_mean_tfidf": 0.0,
+        "explanation": "'energy' shows strong statistical dependence with ham indicator (Chi-Square: 20.20, p-value: 6.98e-06)."
+      },
+      {
+        "feature": "online",
+        "chi2_score": 19.9336,
+        "p_value": 8.017926852592944e-06,
+        "p_value_formatted": "8.02e-06",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0302,
+        "explanation": "'online' shows strong statistical dependence with spam indicator (Chi-Square: 19.93, p-value: 8.02e-06)."
+      },
+      {
+        "feature": "debt",
+        "chi2_score": 19.8201,
+        "p_value": 8.508392258920202e-06,
+        "p_value_formatted": "8.51e-06",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0301,
+        "explanation": "'debt' shows strong statistical dependence with spam indicator (Chi-Square: 19.82, p-value: 8.51e-06)."
+      },
+      {
+        "feature": "offer",
+        "chi2_score": 18.5261,
+        "p_value": 1.675976608072412e-05,
+        "p_value_formatted": "1.68e-05",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0281,
+        "explanation": "'offer' shows strong statistical dependence with spam indicator (Chi-Square: 18.53, p-value: 1.68e-05)."
+      },
+      {
+        "feature": "enron",
+        "chi2_score": 17.6754,
+        "p_value": 2.6199871052355147e-05,
+        "p_value_formatted": "2.62e-05",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Ham Indicator",
+        "leaning_class": "ham",
+        "ham_mean_tfidf": 0.0419,
+        "spam_mean_tfidf": 0.0,
+        "explanation": "'enron' shows strong statistical dependence with ham indicator (Chi-Square: 17.68, p-value: 2.62e-05)."
+      },
+      {
+        "feature": "receive",
+        "chi2_score": 17.6244,
+        "p_value": 2.6911284088967967e-05,
+        "p_value_formatted": "2.69e-05",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0267,
+        "explanation": "'receive' shows strong statistical dependence with spam indicator (Chi-Square: 17.62, p-value: 2.69e-05)."
+      },
+      {
+        "feature": "claim",
+        "chi2_score": 17.3926,
+        "p_value": 3.0400142746648053e-05,
+        "p_value_formatted": "3.04e-05",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Spam Indicator",
+        "leaning_class": "spam",
+        "ham_mean_tfidf": 0.0,
+        "spam_mean_tfidf": 0.0264,
+        "explanation": "'claim' shows strong statistical dependence with spam indicator (Chi-Square: 17.39, p-value: 3.04e-05)."
+      },
+      {
+        "feature": "energy services",
+        "chi2_score": 16.9546,
+        "p_value": 3.828501688125176e-05,
+        "p_value_formatted": "3.83e-05",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Ham Indicator",
+        "leaning_class": "ham",
+        "ham_mean_tfidf": 0.0402,
+        "spam_mean_tfidf": 0.0,
+        "explanation": "'energy services' shows strong statistical dependence with ham indicator (Chi-Square: 16.95, p-value: 3.83e-05)."
+      },
+      {
+        "feature": "regards",
+        "chi2_score": 16.9546,
+        "p_value": 3.828501688125176e-05,
+        "p_value_formatted": "3.83e-05",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Ham Indicator",
+        "leaning_class": "ham",
+        "ham_mean_tfidf": 0.0402,
+        "spam_mean_tfidf": 0.0,
+        "explanation": "'regards' shows strong statistical dependence with ham indicator (Chi-Square: 16.95, p-value: 3.83e-05)."
+      },
+      {
+        "feature": "enron energy",
+        "chi2_score": 16.9546,
+        "p_value": 3.828501688125176e-05,
+        "p_value_formatted": "3.83e-05",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Ham Indicator",
+        "leaning_class": "ham",
+        "ham_mean_tfidf": 0.0402,
+        "spam_mean_tfidf": 0.0,
+        "explanation": "'enron energy' shows strong statistical dependence with ham indicator (Chi-Square: 16.95, p-value: 3.83e-05)."
+      },
+      {
+        "feature": "services",
+        "chi2_score": 16.9546,
+        "p_value": 3.828501688125176e-05,
+        "p_value_formatted": "3.83e-05",
+        "significance": "p < 0.001 (Highly Significant)",
+        "is_significant": true,
+        "tendency": "Ham Indicator",
+        "leaning_class": "ham",
+        "ham_mean_tfidf": 0.0402,
+        "spam_mean_tfidf": 0.0,
+        "explanation": "'services' shows strong statistical dependence with ham indicator (Chi-Square: 16.95, p-value: 3.83e-05)."
+      }
+    ]
+  },
+  "pipeline_path": "/Users/adlin/Desktop/MailGuard-AI/backend/models/model_pipeline.joblib",
+  "status": "active"
+}

@@ -1,8 +1,27 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/index.py": {
+      "memory": 1024,
+      "maxDuration": 60,
+      "includeFiles": "{backend/app.py,backend/config.py,backend/data/enron_spam_data.csv,backend/ml/**,backend/models/**,backend/routes/**,backend/services/**}",
+      "excludeFiles": "{backend/tests/**,backend/scripts/**,backend/.pytest_cache/**,backend/__pycache__/**,**/*.pyc,**/*.pyo,**/*.pyd,backend/*.db*,backend/*.backup,backend/*.ini,backend/conftest.py}"
+    }
+  },
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/api",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/((?!api).*)",
       "destination": "/index.html"
     }
   ],

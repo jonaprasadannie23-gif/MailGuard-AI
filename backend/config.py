@@ -8,14 +8,31 @@ ROOT_DIR = BASE_DIR.parent
 DATA_DIR = BASE_DIR / "data"
 ROOT_DATA_DIR = ROOT_DIR / "data"
 MODELS_DIR = BASE_DIR / "models"
-DB_PATH = BASE_DIR / "probmail.db"
+
+# In serverless environments (Vercel / AWS Lambda), the deployment directory is read-only.
+# Default SQLite fallback path to writable /tmp to eliminate OperationalError when Postgres is not yet linked.
+_IS_SERVERLESS = bool(
+    os.environ.get("VERCEL")
+    or os.environ.get("VERCEL_ENV")
+    or os.environ.get("AWS_LAMBDA_FUNCTION_NAME")
+    or os.environ.get("LAMBDA_TASK_ROOT")
+    or "/var/task" in str(BASE_DIR)
+)
+
+if _IS_SERVERLESS:
+    DB_PATH = Path("/tmp") / "probmail.db"
+else:
+    DB_PATH = BASE_DIR / "probmail.db"
 
 PRIMARY_DATASET_FILENAME = "enron_spam_data.csv"
 SAMPLE_DATASET_PATH = BASE_DIR / "data" / "sample_dataset.csv"
 
 # Ensure directories exist
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-MODELS_DIR.mkdir(parents=True, exist_ok=True)
+try:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
+except OSError:
+    pass
 
 def resolve_dataset_path(filename: str = PRIMARY_DATASET_FILENAME) -> Optional[Path]:
     """
