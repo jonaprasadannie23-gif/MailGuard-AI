@@ -9,7 +9,11 @@ import {
   PredictionRecord,
 } from '../types';
 
-const API_BASE = '/api';
+// In production, VITE_API_URL is set to the Render backend origin.
+// Strip trailing slashes then append /api to get the full base.
+// Falls back to '/api' for local dev (Vite proxy handles it).
+const _rawBase = (import.meta.env.VITE_API_URL ?? '').replace(/\/+$/, '');
+const API_BASE = _rawBase ? `${_rawBase}/api` : '/api';
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (!res.ok) {

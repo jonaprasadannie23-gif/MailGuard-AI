@@ -9,7 +9,14 @@ import {
   PredictionRecord,
 } from '../types';
 
-const API_BASE = '/api';
+// In production, VITE_API_URL is set to the Render backend origin
+// (e.g. https://mailguard-ai-oyh4.onrender.com).
+// We strip any trailing slash and append /api so every request goes to
+// https://mailguard-ai-oyh4.onrender.com/api/<endpoint>.
+// In local development VITE_API_URL is undefined, so we fall back to the
+// relative '/api' path and let Vite's dev-server proxy forward it to Flask.
+const _rawBase = (import.meta.env.VITE_API_URL ?? '').replace(/\/+$/, '');
+const API_BASE = _rawBase ? `${_rawBase}/api` : '/api';
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (!res.ok) {
